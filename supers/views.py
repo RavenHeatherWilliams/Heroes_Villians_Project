@@ -24,3 +24,9 @@ def supers_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def super_detail(request, pk):
+
+    print(pk)
+    return Response(pk)
