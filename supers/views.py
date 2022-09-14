@@ -44,3 +44,15 @@ def super_detail(request, pk):
         super.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
    
+@api_view(['GET'])
+def custom_response(request):
+    if request.method == 'GET':
+        heroes = Super.objects.filter(super_type_id=1)
+        villians = Super.objects.filter(super_type_id=2)
+        hero_serializer = SuperSerializer(heroes, many=True)
+        villian_serializer = SuperSerializer(villians, many=True)
+        custom_response = {
+            "heroes": hero_serializer.data,
+            "villians": villian_serializer.data
+        }
+        return Response(custom_response,status=status.HTTP_200_OK)
